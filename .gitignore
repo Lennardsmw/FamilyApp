@@ -4,3 +4,8 @@ db.sqlite3
 /env
 *.env
 .vscode
+.venv
+venv
+staticfiles
+media/profile_pictures/*.png
+.DS_Store

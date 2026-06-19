@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib import messages
+from django.shortcuts import redirect, render
 
 from .forms import (
-    CustomUserCreationForm,
-    UserSettingsForm,
     CustomUserChangeForm,
+    CustomUserCreationForm,
     ProfilePictureForm,
+    UserSettingsForm,
 )
 from .models import UserSettings
 
@@ -19,8 +19,8 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Benutzer erfolgreich registriert!")  
-            return redirect("login")  
+            messages.success(request, "Benutzer erfolgreich registriert!")
+            return redirect("login")
         else:
             messages.error(request, "Bitte korrigiere die Fehler im Formular.")
     else:
@@ -32,8 +32,11 @@ def register(request):
 @login_required
 def dashboard(request):
     return render(request, "dashboard/dashboard.html")
+
+
 def e404(request):
     return render(request, "e404.html")
+
 
 ## ADD FAMILY MEMBER ##
 @login_required
@@ -45,11 +48,15 @@ def add_family_members(request):
             request.user.family_members.add(new_member)
             messages.success(
                 request, f"{new_member.username} wurde zur Familie hinzugefügt!"
-            ) 
+            )
             return redirect("settings")
         except get_user_model().DoesNotExist:
             messages.error(request, "Benutzer nicht gefunden.")
-            return render(request, "accounts/add_family_member.html", {"error": "Benutzer nicht gefunden."})
+            return render(
+                request,
+                "accounts/add_family_member.html",
+                {"error": "Benutzer nicht gefunden."},
+            )
     return render(request, "accounts/add_family_member.html")
 
 
@@ -78,7 +85,9 @@ def settings(request):
             password_form = PasswordChangeForm(request.user, request.POST)
             if password_form.is_valid():
                 user = password_form.save()
-                update_session_auth_hash(request, user)  # Verhindert, dass der Benutzer ausgeloggt wird
+                update_session_auth_hash(
+                    request, user
+                )  # Verhindert, dass der Benutzer ausgeloggt wird
                 messages.success(request, "Passwort erfolgreich geändert!")
                 return redirect("settings")
             else:
@@ -104,6 +113,28 @@ def settings(request):
             else:
                 messages.error(request, "Fehler im Profilbild Formular.")
 
+        elif "clear_profile_picture" in request.POST:
+            if request.user.profile_picture:
+                request.user.profile_picture.delete(save=True)
+                messages.success(request, "Profilbild entfernt.")
+            return redirect("settings")
+
+        elif "add_family_member" in request.POST:
+            username = request.POST.get("family_username", "")
+            try:
+                new_member = get_user_model().objects.get(username=username)
+                if new_member == request.user:
+                    messages.error(request, "Du kannst dich nicht selbst hinzufügen.")
+                else:
+                    request.user.family_members.add(new_member)
+                    messages.success(
+                        request, f"{new_member.username} wurde zur Familie hinzugefügt!"
+                    )
+                return redirect("settings")
+            except get_user_model().DoesNotExist:
+                messages.error(request, "Benutzer nicht gefunden.")
+                return redirect("settings")
+
     return render(
         request,
         "accounts/settings.html",
@@ -116,5 +147,6 @@ def settings(request):
         },
     )
 
+
 def beta_settings(request):
-    return render(request, "accounts/beta_settings.html")    
+    return render(request, "accounts/beta_settings.html")

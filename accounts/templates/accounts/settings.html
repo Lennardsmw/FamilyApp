@@ -1,91 +1,165 @@
-    {% extends "base.html" %}
-    {% block title %} Settings {% endblock %} 
-    {% block styles %}
+{% extends "base.html" %}
+{% block title %} Settings {% endblock %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="settings-page mt-5 mb-5">
+
+  <h1>Einstellungen</h1>
+
+  <!-- Profilbild -->
+  <div class="settings-section">
+    <div class="settings-section-header">
+      <h2>Profilbild</h2>
+    </div>
+    <div class="profile-picture-wrapper">
+      {% if request.user.profile_picture %}
+        <img src="{{ request.user.profile_picture.url }}"
+             alt="Profilbild"
+             class="profile-picture-preview">
+      {% else %}
         {% load static %}
-    {% endblock %}
-
-    {% block content %}
-    <div class="container mt-5">
-        <h1>Einstellungen ⚙️</h1>
-            <!-- Profilbild -->
-        <h2 class="mt-4">Profilbild</h2>
-        {% if request.user.profile_picture %}
-        <img src="{{ request.user.profile_picture.url }}" alt="Profilbild" class="img-thumbnail mb-3" style="max-width: 200px;">
-        {% endif %}
+        <img src="{% static 'img/default_profile.png' %}"
+             alt="Standard Profilbild"
+             class="profile-picture-preview">
+      {% endif %}
+      <div class="profile-picture-upload">
         <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ profile_picture_form.as_p }}
-            <button type="submit" name="change_profile_picture" class="btn btn-primary">Profilbild speichern</button>
+          {% csrf_token %}
+
+          {% if request.user.profile_picture %}
+            <div class="clear-btn-row">
+              <button type="submit" name="clear_profile_picture" class="btn btn-outline-danger btn-sm">
+                Aktuelles Bild entfernen
+              </button>
+            </div>
+          {% endif %}
+
+          <div class="file-upload-row">
+            {{ profile_picture_form.profile_picture }}
+            <button type="submit" name="change_profile_picture" class="btn btn-primary">
+              Hochladen
+            </button>
+          </div>
         </form>
-
-        <!-- Design-Einstellungen -->
-        <h2 class="mt-4">Design anpassen</h2>
-        <form method="post" class="mb-4">
-            {% csrf_token %}
-            {{ settings_form.as_p }}
-            <button type="submit" name="change_design" class="btn btn-primary">Design speichern</button>
-        </form>
-        
-        
-        <!-- Benutzername und E-Mail ändern -->
-
-        <h2 class="mt-4">Benutzername und E-Mail ändern</h2>
-        <form method="post" class="mb-4">
-            {% csrf_token %}
-            <p>{{ user_form.username.label_tag }} </p>
-            <p>  {{ user_form.username }}</p>
-            <p>{{ user_form.email.label_tag }} </p>
-            <p>   {{ user_form.email }}</p>
-            <button type="submit" name="change_username_email" class="btn btn-primary">Änderungen speichern</button>
-        </form>
-
-        <!-- Passwort ändern -->
-        <h2 class="mt-4">Passwort ändern</h2>
-        <form method="post" class="mb-4">
-            {% csrf_token %}
-            {{ password_form.as_p }}
-            <button type="submit" name="change_password" class="btn btn-primary">Passwort speichern</button>
-        </form>
-
-        <!-- Familienmitglieder  -->
-        <div class="row">
-            <div class="col-md-3">
-
-        
-        <h2 >Deine Familienmitglieder</h2>
-        
-        <ul class="list-group">
-            {% for member in family_members %}
-            <li class="list-group-item">{{ member.username }}</li>
-            {% empty %}
-            <li class="list-group-item">Keine Familienmitglieder hinzugefügt.</li>
-            {% endfor %}
-            
-            {% if error %}
-            <li class="list-group-item">
-                <div class="alert alert-danger">{{ error }}</div>
-            </li>
-            {% endif %}
-            
-            <li class="list-group-item p-0">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <input type="text" 
-                            name="username" 
-                            class="form-control" 
-                            id="username" 
-                            placeholder="Benutzer hinzufügen" 
-                            required>
-                        <button type="submit" class="btn btn-outline-success">Hinzufügen</button>
-                    </div>
-                </form>
-            </li>
-        </ul>
+      </div>
     </div>
+  </div>
+
+  <!-- Design -->
+  <div class="settings-section">
+    <div class="settings-section-header">
+      <h2>Design anpassen</h2>
+    </div>
+    <form method="post" class="mb-0">
+      {% csrf_token %}
+      {{ settings_form.as_p }}
+      <button type="submit" name="change_design" class="btn btn-primary">
+        Speichern
+      </button>
+    </form>
+  </div>
+
+  <!-- Benutzername & E-Mail -->
+  <div class="settings-section">
+    <div class="settings-section-header">
+      <h2>Benutzername &amp; E-Mail</h2>
+    </div>
+    <form method="post" class="mb-0">
+      {% csrf_token %}
+      <p>
+        <label for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}</label>
+        {{ user_form.username }}
+      </p>
+      <p>
+        <label for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
+        {{ user_form.email }}
+      </p>
+      <button type="submit" name="change_username_email" class="btn btn-primary">
+        Speichern
+      </button>
+    </form>
+  </div>
+
+  <!-- Passwort -->
+  <div class="settings-section">
+    <div class="settings-section-header">
+      <h2>Passwort ändern</h2>
+    </div>
+    <form method="post" class="mb-0">
+      {% csrf_token %}
+
+      <div class="pw-field">
+        <label for="{{ password_form.old_password.id_for_label }}">{{ password_form.old_password.label }}</label>
+        {{ password_form.old_password }}
+        {{ password_form.old_password.errors }}
+      </div>
+
+      <div class="pw-field">
+        <label for="{{ password_form.new_password1.id_for_label }}">{{ password_form.new_password1.label }}</label>
+        {{ password_form.new_password1 }}
+        {{ password_form.new_password1.errors }}
+      </div>
+
+      <div class="pw-field">
+        <label for="{{ password_form.new_password2.id_for_label }}">{{ password_form.new_password2.label }}</label>
+        {{ password_form.new_password2 }}
+        {{ password_form.new_password2.errors }}
+      </div>
+
+      <details class="pw-hints">
+        <summary>
+          <span class="pw-hints-icon">i</span>
+          <span class="pw-hints-text">Passwort-Anforderungen</span>
+          <span class="pw-hints-arrow">▸</span>
+        </summary>
+        <div class="pw-hints-list">
+          <ul>
+            <li>Mindestens 8 Zeichen lang</li>
+            <li>Kann nicht nur Zahlen sein</li>
+            <li>Kann nicht zu ähnlich deinem Benutzername sein</li>
+            <li>Kann kein gebräuchliches Passwort sein</li>
+          </ul>
+        </div>
+      </details>
+
+      <button type="submit" name="change_password" class="btn btn-primary">
+        Ändern
+      </button>
+    </form>
+  </div>
+
+  <!-- Familienmitglieder -->
+  <div class="settings-section">
+    <div class="settings-section-header">
+      <h2>Familienmitglieder</h2>
     </div>
 
+    {% if family_members %}
+      <div class="family-list">
+        {% for member in family_members %}
+          <span class="family-member-badge">{{ member.username }}</span>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="family-empty">Noch keine Familienmitglieder hinzugefügt.</p>
+    {% endif %}
 
-                
+    <form method="post" class="family-add-form">
+      {% csrf_token %}
+      <input type="text"
+             name="family_username"
+             id="family_username"
+             placeholder="Benutzername eingeben"
+             required>
+      <button type="submit" name="add_family_member" class="btn btn-success">
+        Hinzufügen
+      </button>
+    </form>
+  </div>
 
-    {% endblock %}
+</div>
+{% endblock %}

@@ -2,3 +2,6 @@ Django
 django_environ
 Pillow
 python-dotenv
+gunicorn
+whitenoise
+psycopg2-binary

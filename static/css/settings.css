@@ -1,0 +1,428 @@
+/* ═══════════════════════════════════════════
+   SETTINGS – Humanized Design
+   ═══════════════════════════════════════════ */
+
+/* ── Layout ── */
+.settings-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.settings-page h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.black .settings-page h1 {
+  color: white;
+}
+
+/* ── Section Cards ── */
+.settings-section {
+  background: var(--bs-body-bg);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.black .settings-section {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #2a2a2a;
+  color: white;
+}
+
+.black .settings-section h2 {
+  color: white;
+}
+
+.settings-section:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.black .settings-section:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.settings-section-header {
+  margin-bottom: 1rem;
+}
+
+.settings-section-header h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Profile Picture ── */
+.profile-picture-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.profile-picture-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(128, 128, 128, 0.2);
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.black .profile-picture-preview {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: #3a3a3a;
+}
+
+.profile-picture-upload {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Clear button row */
+.clear-btn-row {
+  margin-bottom: 0.5rem;
+}
+
+/* File input + button in one row */
+.file-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.file-upload-row input[type="file"] {
+  flex: 1;
+  min-width: 140px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 0.4rem 0.6rem;
+  background: white;
+  cursor: pointer;
+}
+
+.black .file-upload-row input[type="file"] {
+  background: #3a3a3a;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.file-upload-row input[type="file"]::file-selector-button {
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.3rem 0.75rem;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+
+.black .file-upload-row input[type="file"]::file-selector-button {
+  background: #555;
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.file-upload-row .btn {
+  margin-top: 0;
+  white-space: nowrap;
+}
+
+/* ── Forms inside settings ── */
+.settings-section form label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  color: var(--bs-body-color);
+}
+
+.black .settings-section form label {
+  color: #ddd;
+}
+
+.settings-section form input,
+.settings-section form select {
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.black .settings-section form input,
+.black .settings-section form select {
+  background: #3a3a3a;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.settings-section form input:focus,
+.settings-section form select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  outline: none;
+}
+
+.settings-section form p {
+  margin-bottom: 0.75rem;
+}
+
+.black .settings-section form p {
+  color: white;
+}
+
+.settings-section .helptext {
+  display: block;
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
+.black .settings-section .helptext {
+  color: #aaa;
+}
+
+.errorlist {
+  color: #dc3545;
+  font-size: 0.85rem;
+  padding: 0;
+  margin: 0 0 0.3rem 0;
+  list-style: none;
+}
+
+/* ── Action Button ── */
+.settings-section .btn {
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-top: 0.25rem;
+}
+
+.settings-section .btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Family Members ── */
+.family-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.family-member-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(13, 110, 253, 0.08);
+  color: var(--bs-body-color);
+  border-radius: 20px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.black .family-member-badge {
+  background: rgba(13, 110, 253, 0.2);
+  color: white;
+}
+
+.family-add-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+.family-add-form input {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.black .family-add-form input {
+  background: #3a3a3a;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.family-add-form input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  outline: none;
+}
+
+.family-empty {
+  color: #999;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.black .family-empty {
+  color: #bbb;
+}
+
+/* ── Password Fields ── */
+.pw-field {
+  margin-bottom: 0.75rem;
+}
+
+.pw-field label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  color: var(--bs-body-color);
+}
+
+.black .pw-field label {
+  color: #ddd;
+}
+
+.pw-field input {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.black .pw-field input {
+  background: #3a3a3a;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.pw-field input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  outline: none;
+}
+
+.pw-field .errorlist {
+  color: #dc3545;
+  font-size: 0.85rem;
+  padding: 0;
+  margin: 0.25rem 0 0 0;
+  list-style: none;
+}
+
+/* ── Password Hints (Details/Summary) ── */
+.pw-hints {
+  margin-bottom: 1rem;
+  max-width: 400px;
+}
+
+.pw-hints summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.3rem 0;
+  font-size: 0.9rem;
+  color: var(--bs-body-color);
+  user-select: none;
+}
+
+.pw-hints summary::-webkit-details-marker {
+  display: none;
+}
+
+.black .pw-hints summary {
+  color: #ddd;
+}
+
+.pw-hints-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.2);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-style: italic;
+  font-family: serif;
+  flex-shrink: 0;
+}
+
+.black .pw-hints-icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.pw-hints-list {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(128, 128, 128, 0.06);
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.black .pw-hints-list {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pw-hints-list ul {
+  margin: 0;
+  padding: 0 0 0 1.2rem;
+}
+
+.pw-hints-list li {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--bs-body-color);
+}
+
+.black .pw-hints-list li {
+  color: #ccc;
+}
+
+/* ── Dividers on mobile ── */
+@media (max-width: 576px) {
+  .settings-page {
+    padding: 0 0.5rem;
+  }
+
+  .settings-section {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .profile-picture-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .file-upload-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .file-upload-row .btn {
+    align-self: flex-start;
+  }
+
+  .family-add-form {
+    flex-direction: column;
+  }
+}

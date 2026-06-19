@@ -15,7 +15,7 @@
     <!-- Globale Design-CSS -->
 <link rel="stylesheet" href="{% static 'css/design.css' %}">
 </head>
-<body class="{{ request.user.settings.design }}">
+<body class="{% if user.is_authenticated %}{{ request.user.settings.design }}{% else %}colored{% endif %}">
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="/" style="font-size: 24px; font-weight: bold;">
