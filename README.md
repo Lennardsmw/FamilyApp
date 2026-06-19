@@ -30,7 +30,7 @@ Eine Django-Web-App für Familienorganisation mit Einkaufsliste, Dashboard und m
 ### 1. Repository klonen
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Lennardsmw/FamilyApp.git
 cd FamilyApp
 ```
 
