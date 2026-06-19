@@ -6,7 +6,7 @@ Eine Django-Web-App für Familienorganisation mit Einkaufsliste, Dashboard und m
 
 | Login | Dashboard |
 |-------|-----------|
-| ![Login](assets/demo4.png) | ![Dashboard](assets/demo1.png) |
+| ![Login](assets/demo0.png) | ![Dashboard](assets/demo1.png) |
 
 | Settings (Profilbild, Design, Passwort) | Settings (Familienmitglieder) |
 |----------------------------------------|------------------------------|
@@ -14,7 +14,7 @@ Eine Django-Web-App für Familienorganisation mit Einkaufsliste, Dashboard und m
 
 | Einkaufsliste |
 |---------------|
-| ![Einkaufsliste](assets/demo0.png) |
+| ![Einkaufsliste](assets/demo4.png) |
 
 ## Features
 
